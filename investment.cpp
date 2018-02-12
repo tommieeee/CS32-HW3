@@ -5,6 +5,8 @@ using namespace std;
 
 //Your declarations and implementations would go here
 
+//////////class Investment///////////////
+
 class Investment
 {
 public:
@@ -24,9 +26,9 @@ private:
 };
 
 
+/////////////class Painting////////////////
 
-
-class Painting:public Investment
+class Painting :public Investment
 {
 public:
 	Painting(string name, int purchasePrice)
@@ -34,7 +36,7 @@ public:
 	{}
 	virtual ~Painting()
 	{
-		cout << "Destroying " << name() << " a painting" << endl;
+		cout << "Destroying " << name() << ", a painting" << endl;
 	}
 	virtual bool fungible() const { return m_fungible; }
 	virtual string description() const { return m_description; }
@@ -46,6 +48,50 @@ private:
 
 };
 
+
+//////////class House////////////
+
+class House :public Investment
+{
+public:
+	House(string name, int purchasePrice)
+		: Investment(name, purchasePrice), m_fungible(false), m_description("house")
+	{}
+	virtual ~House()
+	{
+		cout << "Destroying the house " << name() << endl;
+	}
+	virtual bool fungible() const { return m_fungible; }
+	virtual string description() const { return m_description; }
+
+
+private:
+	bool m_fungible;
+	string m_description;
+
+};
+
+//////////class Stock/////////////////
+
+class Stock :public Investment
+{
+public:
+	Stock(string name, int purchasePrice, string description)
+		: Investment(name, purchasePrice), m_fungible(true), m_description("stock trading as " + description)
+	{}
+	virtual ~Stock()
+	{
+		cout << "Destroying " << name() << ", a stock holding" << endl;
+	}
+	virtual bool fungible() const { return m_fungible; }
+	virtual string description() const { return m_description; }
+
+
+private:
+	bool m_fungible;
+	string m_description;
+
+};
 
 void display(const Investment* inv)
 {
@@ -60,18 +106,15 @@ int main()
 	Investment* portfolio[4];
 	portfolio[0] = new Painting("Salvator Mundi", 450300000);
 	// Stock holdings have a name, value, and ticker symbol
-	//portfolio[1] = new Stock("Alphabet", 100000, "GOOGL");
-	//portfolio[2] = new Stock("Symantec", 50000, "SYMC");
-	//portfolio[3] = new House("4 Privet Drive", 660000);
+	portfolio[1] = new Stock("Alphabet", 100000, "GOOGL");
+	portfolio[2] = new Stock("Symantec", 50000, "SYMC");
+	portfolio[3] = new House("4 Privet Drive", 660000);
 
-	//for (int k = 0; k < 4; k++)
-		//display(portfolio[k]);
-	display(portfolio[0]);
+	for (int k = 0; k < 4; k++)
+		display(portfolio[k]);
 
 	// Clean up the investments before exiting
-	//cout << "Cleaning up" << endl;
-	//for (int k = 0; k < 4; k++)
-	//	delete portfolio[k];
-	delete portfolio[0];
-	cin.get();
+	cout << "Cleaning up" << endl;
+	for (int k = 0; k < 4; k++)
+		delete portfolio[k];
 }
