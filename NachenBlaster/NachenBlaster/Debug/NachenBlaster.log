@@ -1,0 +1,4 @@
+﻿  StudentWorld.cpp
+d:\textbook and cource material\cs32\project3\nachenblaster\nachenblaster\studentworld.cpp(42): warning C4018: '<': signed/unsigned mismatch
+d:\textbook and cource material\cs32\project3\nachenblaster\nachenblaster\studentworld.cpp(47): warning C4018: '<': signed/unsigned mismatch
+  NachenBlaster.vcxproj -> D:\TextBook and Cource material\cs32\Project3\NachenBlaster\Debug\NachenBlaster.exe
